@@ -5,7 +5,7 @@ const stopt = document.querySelector('[data-stop]');
 start.addEventListener('click', changeColor);
 
 function changeColor (e) {
-    body.style.backgroundColor = getRandomHexColor();
+    body.style.backgroundColor = getRandomHexColor()
     if (e.target === start) {
         return start.setAttribute('disabled', 'true')
     }
