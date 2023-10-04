@@ -2,18 +2,32 @@ const body  = document.querySelector('body');
 const start = document.querySelector('[data-start]');
 const stopt = document.querySelector('[data-stop]');
 
-start.addEventListener('click', changeColor);
+start.addEventListener('click', onStart);
 
-function changeColor (e) {
-    body.style.backgroundColor = getRandomHexColor()
-    if (e.target === start) {
-        return start.setAttribute('disabled', 'true')
-    }
-     if (e.target === stopt) {
-        return setAttribute('disabled', 'true')
-    }
-    setInterval(changeColor,1000);
+let onInterval = false;
+stopt.disabled = true;
+
+function onStart() {
+    const IntId = setInterval(() => {
+        body.style.backgroundColor = getRandomHexColor();
+        onInterval = true;
+        console.log('I am ON');
+
+        if (onInterval) {
+            start.disabled = true;
+            stopt.disabled = false;
+        } 
+
+        stopt.addEventListener('click', onStop);
+        function onStop() {
+            clearInterval(IntId);
+            onInterval = false;
+            start.disabled = false;
+            stopt.disabled = true;
+        }
+    }, 1000);
 }
+
 
 
 function getRandomHexColor() {
